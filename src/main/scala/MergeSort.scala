@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 object MergeSort {
   def sort(list: List[Int]): List[Int] = {
 		list match {
@@ -13,16 +15,18 @@ object MergeSort {
 				merge(sort(xs), sort(ys))
 		}
 	}
-	private def merge(xs: List[Int], ys: List[Int]): List[Int] = {
+  
+  @tailrec
+	private def merge(xs: List[Int], ys: List[Int], acc: List[Int] = List.empty): List[Int] = {
 		xs match {
 			case x :: xt => 
 			  ys match {
 					case y :: yt =>
-						if (x < y) x :: merge(xt, ys)
-						else y :: merge(yt, xs)
-					case Nil => xs
+						if (x < y) merge(xt, ys, acc :+ x)
+						else merge(yt, xs, acc :+ y)
+					case Nil => acc ++ xs 
 			}
-			case Nil => ys
+			case Nil => acc ++ ys
 		}
 	}
 }
