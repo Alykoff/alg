@@ -2,10 +2,10 @@ import scala.annotation.tailrec
 
 object MergeSort {
   def sort(list: List[Int]): List[Int] = {
-		list match {
-			case Nil => Nil
-			case x :: Nil => list
-			case _ =>
+  	list match {
+  		case Nil => Nil
+  		case x :: Nil => list
+  		case _ =>
 				val middle = 
 				  if (list.length % 2 != 0) list.length / 2 + 1
 				  else list.length / 2
